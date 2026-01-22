@@ -6,3 +6,8 @@
 body {
   height: 100vh;
 }
+
+#app {
+  height: 100%;
+  border: solid 2px black;
+}
