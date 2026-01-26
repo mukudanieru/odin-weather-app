@@ -8,14 +8,51 @@
   </head>
   <body>
     <div id="app">
-      <input
-        placeholder="Search for Location"
-        id="search-weather"
-        type="text"
-      />
+      <div class="weather-app-wrapper">
+        <header class="header">
+          <div class="search-container">
+            <label class="search-label" for="weatherSearch">
+              Search for Location
+            </label>
 
-      <h1>Locations:</h1>
-      <ul id="location"></ul>
+            <div class="search-box">
+              <div class="search-input-row">
+                <input
+                  type="text"
+                  id="weatherSearch"
+                  placeholder="Enter city name..."
+                />
+
+                <div class="search-icon">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.3-4.3"></path>
+                  </svg>
+                </div>
+              </div>
+
+              <div class="search-border" aria-hidden="true"></div>
+            </div>
+
+            <div id="suggestions" class="suggestions"></div>
+          </div>
+        </header>
+
+        <main class="main">
+          <div class="content"></div>
+          <div class="border-overlay" aria-hidden="true"></div>
+        </main>
+      </div>
     </div>
     <script type="module" src="/src/main.js"></script>
   </body>

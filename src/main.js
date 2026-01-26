@@ -1,44 +1,59 @@
 import "./style.css";
+import { weatherSearch, fetchJSON } from "./modules/api";
+import { createLocationItem } from "./modules/ui";
 
-const list = document.querySelector("#location");
+const API_KEY = "185f9080f22643cd89d35208262001";
 
-function getLocation(data) {
-  console.log(data);
-
-  list.replaceChildren();
-
-  data.forEach((item) => {
-    const li = document.createElement("li");
-    li.textContent = `${item.name}, ${item.region} from ${item.country}.`;
-    list.appendChild(li);
-  });
-}
-
+const list = document.querySelector("#suggestions");
+const search = document.querySelector("#weatherSearch");
 let timeoutID;
-const search = document.querySelector("#search-weather");
 
-search.addEventListener("input", (e) => {
+function handleSearchInput(e) {
   clearTimeout(timeoutID);
 
-  const input = e.target.value;
-  const url = `http://api.weatherapi.com/v1/search.json?key=185f9080f22643cd89d35208262001&q=${input}`;
-
   timeoutID = setTimeout(() => {
-    fetch(url)
-      .then((response) => {
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        return response.json();
-      })
+    const input = e.target?.value ?? "";
+
+    if (input === "") {
+      list.replaceChildren();
+      suggestions.classList.remove("open");
+
+      return;
+    }
+
+    const url = weatherSearch(API_KEY, input); // For location
+    console.log(url);
+
+    fetchJSON(url)
       .then((data) => {
-        getLocation(data);
+        console.log(data);
+        list.replaceChildren();
+
+        if (data.length === 0) {
+          suggestions.classList.remove("open");
+          return;
+        }
+
+        suggestions.classList.add("open");
+
+        data.forEach((item) => {
+          const li = createLocationItem(item);
+          list.appendChild(li);
+        });
       })
       .catch((err) => {
         console.error(err);
-        list.replaceChildren();
-
-        const li = document.createElement("li");
-        li.textContent = "No location found.";
-        list.appendChild(li);
       });
   }, 500);
+}
+
+// Search Input Event
+search.addEventListener("input", handleSearchInput);
+
+document.addEventListener("click", (e) => {
+  console.log(e.target);
+
+  // Implement when clicking outside the wrapper
+
+  // Implement when clicking the button
 });
