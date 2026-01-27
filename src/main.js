@@ -51,9 +51,27 @@ function handleSearchInput(e) {
 search.addEventListener("input", handleSearchInput);
 
 document.addEventListener("click", (e) => {
-  console.log(e.target);
+  const button = e.target.closest(".suggestion-item");
+  const clickedInsideList = list.contains(e.target);
+  const hasSuggestions = list.textContent.trim();
 
-  // Implement when clicking outside the wrapper
+  // Open suggestions when clicking the search input
+  if (e.target.id === "weatherSearch" && hasSuggestions) {
+    suggestions.classList.add("open");
+    return;
+  }
 
-  // Implement when clicking the button
+  // Handle suggestion selection (click anywhere inside the button)
+  if (button && clickedInsideList) {
+    suggestions.classList.remove("open");
+    // search.value = "";
+    console.log(button.dataset.url);
+    return;
+  }
+
+  // Close suggestions when clicking outside the suggestions list
+  if (!clickedInsideList) {
+    suggestions.classList.remove("open");
+    return;
+  }
 });
