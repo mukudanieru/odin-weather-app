@@ -11,16 +11,14 @@
       <div class="weather-app-wrapper">
         <header class="header">
           <div class="search-container">
-            <label class="search-label" for="weatherSearch">
-              Search for Location
-            </label>
+            <label class="search-label" for="weatherSearch"> Location </label>
 
             <div class="search-box">
               <div class="search-input-row">
                 <input
                   type="text"
                   id="weatherSearch"
-                  placeholder="Enter city name..."
+                  placeholder="Search for a city or town"
                 />
 
                 <div class="search-icon">
@@ -49,7 +47,26 @@
         </header>
 
         <main class="main">
-          <div class="content"></div>
+          <div class="weather-card">
+            <div class="temperature-container">
+              <div class="temperature-main">
+                <img
+                  src="./public/113.webp"
+                  alt="weather icon"
+                  class="weather-icon"
+                />
+                <div class="weather-temp">
+                  <p class="temperature-value">27°</p>
+                  <p class="weather-condition">Partly cloudy</p>
+                </div>
+              </div>
+
+              <div class="weather-meta">
+                <p class="location">Rosario, Cavite</p>
+                <p class="feels-like">Feels like 31.7°C</p>
+              </div>
+            </div>
+          </div>
           <div class="border-overlay" aria-hidden="true"></div>
         </main>
       </div>

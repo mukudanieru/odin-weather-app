@@ -1,3 +1,11 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+
+:root {
+  --font-base: "SF Pro Display", "Roboto";
+  --color-bg: 245 245 245;
+  --color-base: #fff;
+}
+
 * {
   margin: 0;
   box-sizing: border-box;
@@ -5,8 +13,8 @@
 
 body {
   height: 100vh;
-  font-family: inter, sans-serif;
-  background-color: #f5f5f5;
+  font-family: var(--font-base);
+  background-color: rgb(var(--color-bg));
 }
 
 #app {
@@ -55,7 +63,7 @@ body {
 .search-box {
   position: relative;
   width: 100%;
-  background: #ffffff;
+  background: var(--color-base);
   border-radius: 8px;
   min-width: 120px;
 }
@@ -63,6 +71,7 @@ body {
 .search-input-row {
   display: flex;
   align-items: center;
+
   width: 100%;
   border-radius: inherit;
   overflow: hidden;
@@ -72,6 +81,7 @@ body {
   flex: 1;
   padding: 12px 16px;
   font-size: 16px;
+  font-family: "SF Pro Display", "Roboto";
   color: #1e1e1e;
   background: transparent;
   border: none;
@@ -80,10 +90,11 @@ body {
 }
 
 .search-icon {
-  margin-right: 16px;
-  color: #666;
   display: flex;
   align-items: center;
+
+  margin-right: 16px;
+  color: #666;
 }
 
 .search-border {
@@ -95,18 +106,19 @@ body {
 }
 
 .suggestions {
+  display: none;
   position: absolute;
+
   top: calc(100% + 4px);
   left: 0;
   right: 0;
-  background: #ffffff;
+  background: var(--color-base);
   border: 1px solid #d9d9d9;
   border-radius: 8px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
   max-height: 300px;
   overflow-y: auto;
   z-index: 10;
-  display: none;
 }
 
 .suggestions.open {
@@ -137,6 +149,7 @@ body {
 }
 
 .suggestion-title {
+  font-family: "SF Pro Display", "Roboto";
   font-weight: 600;
   font-size: 14px;
   color: #1e1e1e;
@@ -144,6 +157,7 @@ body {
 }
 
 .suggestion-subtitle {
+  font-family: "SF Pro Display", "Roboto";
   font-weight: 400;
   font-size: 12px;
   color: #666;
@@ -151,17 +165,17 @@ body {
 }
 
 .main {
-  background-color: #ffffff;
+  background-color: var(--color-base);
   border-radius: 8px;
   position: relative;
 }
 
-.content {
+.weather-card {
   padding: 1.5rem;
 }
 
 @media (min-width: 640px) {
-  .content {
+  .weather-card {
     padding: 2rem;
   }
 }
@@ -172,4 +186,98 @@ body {
   border: 1px solid #d9d9d9;
   border-radius: 8px;
   pointer-events: none;
+}
+
+.temperature-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+
+  padding-bottom: 24px;
+}
+
+.temperature-main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+
+  border-radius: 0.4rem;
+  padding: 1.2rem 2rem 1.5rem 0.5rem;
+}
+
+.temperature-main:hover {
+  background-color: rgb(var(--color-bg) / 20);
+  cursor: pointer;
+}
+
+.weather-icon {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+}
+
+.weather-temp {
+  display: flex;
+  flex-direction: column;
+}
+
+.temperature-value {
+  font-weight: 700;
+  font-size: 60px;
+  line-height: 1.2;
+  letter-spacing: -2.16px;
+  color: #1e1e1e;
+}
+
+.weather-condition {
+  font-weight: 400;
+  font-size: 18px;
+  color: #1e1e1e;
+}
+
+.weather-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: center;
+}
+
+.location {
+  font-weight: 600;
+  font-size: 20px;
+  letter-spacing: -0.48px;
+  color: #1e1e1e;
+}
+
+.feels-like {
+  font-weight: 400;
+  font-size: 18px;
+  color: #1e1e1e;
+}
+
+@media (min-width: 640px) {
+  .temperature-container {
+    flex-direction: row;
+    gap: 32px;
+  }
+
+  .temperature-value {
+    font-size: 72px;
+  }
+
+  .weather-condition,
+  .feels-like {
+    font-size: 20px;
+  }
+
+  .location {
+    font-size: 24px;
+  }
+
+  .weather-meta {
+    text-align: left;
+  }
 }

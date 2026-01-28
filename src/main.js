@@ -1,3 +1,4 @@
+import "./assets/fonts.css";
 import "./style.css";
 import { weatherSearch, fetchJSON } from "./modules/api";
 import { createLocationItem } from "./modules/ui";
