@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/odin-weather-app/cloud-sun.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>odin-weather-app</title>
+    <script type="module" crossorigin src="/odin-weather-app/assets/index-CaJYUXMz.js"></script>
+    <link rel="stylesheet" crossorigin href="/odin-weather-app/assets/index-CvkcmPqM.css">
+  </head>
+  <body>
+    <div id="app">
+      <div class="weather-app-wrapper">
+        <header class="header">
+          <div class="search-container">
+            <label class="search-label" for="weatherSearch"> Location </label>
+
+            <div class="search-box">
+              <div class="search-input-row">
+                <input
+                  type="text"
+                  id="weather-search"
+                  placeholder="Search for a city or town"
+                />
+
+                <div class="search-icon">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.3-4.3"></path>
+                  </svg>
+                </div>
+              </div>
+
+              <div class="search-border" aria-hidden="true"></div>
+            </div>
+
+            <div id="suggestions" class="suggestions"></div>
+          </div>
+        </header>
+
+        <main class="main">
+          <div class="weather-card">
+            <div class="temperature-container">
+              <div class="temperature-main clickable" id="toggle-temperature">
+                <div id="weather-icon-container"></div>
+                <div class="weather-temp">
+                  <p id="temperature" class="temperature-value">--°</p>
+                  <p id="condition" class="weather-condition">---</p>
+                </div>
+              </div>
+
+              <div class="weather-meta">
+                <p id="location" class="location">--</p>
+                <p id="feels-like" class="feels-like">--</p>
+              </div>
+            </div>
+
+            <div class="weather-metrics">
+              <div class="weather-metric clickable" id="precipitation-toggle">
+                <div class="metric-header">
+                  <div class="metric-icon icon-precipitation">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="lucide lucide-cloud-rain-icon lucide-cloud-rain"
+                    >
+                      <path
+                        d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"
+                      />
+                      <path d="M16 14v6" />
+                      <path d="M8 14v6" />
+                      <path d="M12 16v6" />
+                    </svg>
+                  </div>
+                  <div class="metric-label">Precipitation</div>
+                </div>
+                <p class="metric-value" id="precipitation">--</p>
+              </div>
+
+              <div class="weather-metric clickable" id="wind-speed-toggle">
+                <div class="metric-header">
+                  <div class="metric-icon icon-wind">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path d="M17.7 7.7a2.5 2.5 0 1 1 1.8 4.3H2"></path>
+                      <path d="M9.6 4.6A2 2 0 1 1 11 8H2"></path>
+                      <path d="M12.6 19.4A2 2 0 1 0 14 16H2"></path>
+                    </svg>
+                  </div>
+                  <div class="metric-label">Wind Speed</div>
+                </div>
+                <p class="metric-value" id="wind-speed">--</p>
+              </div>
+
+              <div class="weather-metric">
+                <div class="metric-header">
+                  <div class="metric-icon icon-humidity">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path
+                        d="M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 6.75 7 5.3c-.29 1.45-1.14 2.84-2.29 3.76S3 11.1 3 12.25c0 2.22 1.8 4.05 4 4.05z"
+                      ></path>
+                      <path
+                        d="M12.56 6.6A10.97 10.97 0 0 0 14 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a6.98 6.98 0 0 1-11.91 4.97"
+                      ></path>
+                    </svg>
+                  </div>
+                  <div class="metric-label">Humidity</div>
+                </div>
+                <p class="metric-value" id="humidity">--</p>
+              </div>
+
+              <div class="weather-metric">
+                <div class="metric-header">
+                  <div class="metric-icon icon-uv">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <circle cx="12" cy="12" r="4"></circle>
+                      <path d="M12 2v2"></path>
+                      <path d="M12 20v2"></path>
+                      <path d="m4.93 4.93 1.41 1.41"></path>
+                      <path d="m17.66 17.66 1.41 1.41"></path>
+                      <path d="M2 12h2"></path>
+                      <path d="M20 12h2"></path>
+                      <path d="m6.34 17.66-1.41 1.41"></path>
+                      <path d="m19.07 4.93-1.41 1.41"></path>
+                    </svg>
+                  </div>
+                  <div class="metric-label">UV Index</div>
+                </div>
+                <p class="metric-value" id="uv-index">--</p>
+              </div>
+
+              <div class="weather-metric clickable" id="visibility-toggle">
+                <div class="metric-header">
+                  <div class="metric-icon icon-visibility">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path
+                        d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"
+                      ></path>
+                      <circle cx="12" cy="12" r="3"></circle>
+                    </svg>
+                  </div>
+                  <div class="metric-label">Visibility</div>
+                </div>
+                <p class="metric-value" id="visibility">--</p>
+              </div>
+
+              <div class="weather-metric">
+                <div class="metric-header">
+                  <div class="metric-icon icon-cloud">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="lucide lucide-cloudy-icon lucide-cloudy"
+                    >
+                      <path
+                        d="M17.5 12a1 1 0 1 1 0 9H9.006a7 7 0 1 1 6.702-9z"
+                      />
+                      <path
+                        d="M21.832 9A3 3 0 0 0 19 7h-2.207a5.5 5.5 0 0 0-10.72.61"
+                      />
+                    </svg>
+                  </div>
+                  <div class="metric-label">Cloud Cover</div>
+                </div>
+                <p class="metric-value" id="cloud-cover">--</p>
+              </div>
+            </div>
+          </div>
+          <div class="border-overlay" aria-hidden="true"></div>
+        </main>
+      </div>
+    </div>
+
+    <footer class="page-footer">
+      Created by&nbsp;
+      <a
+        class="footer-link"
+        href="https://github.com/mukudanieru"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        mukudanieru
+      </a>
+    </footer>
+
+  </body>
+</html>
