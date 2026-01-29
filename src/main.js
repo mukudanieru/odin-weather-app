@@ -7,7 +7,7 @@ import {
   normalizeWeatherData,
   createWeatherData,
 } from "./modules/api";
-import { createLocationItem } from "./modules/ui";
+import { createLocationItem, updateWeatherCard } from "./modules/ui";
 
 const weatherData = createWeatherData();
 const API_KEY = "185f9080f22643cd89d35208262001";
@@ -64,7 +64,7 @@ document.addEventListener("click", (e) => {
   const hasSuggestions = list.textContent.trim();
 
   // Open suggestions when clicking the search input
-  if (e.target.id === "weatherSearch" && hasSuggestions) {
+  if (e.target.id === "weather-search" && hasSuggestions) {
     suggestions.classList.add("open");
     return;
   }
@@ -80,6 +80,7 @@ document.addEventListener("click", (e) => {
       .then((data) => {
         const cleanData = normalizeWeatherData(data);
         weatherData.setData(cleanData);
+        updateWeatherCard(weatherData.getFormatted());
       })
       .catch((err) => {
         console.error(err);

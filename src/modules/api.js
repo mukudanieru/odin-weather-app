@@ -15,27 +15,140 @@ export function fetchJSON(url) {
   });
 }
 
+const TEMP_UNIT = {
+  CELSIUS: "celsius", // DEFAULT
+  FAHRENHEIT: "fahrenheit",
+};
+
+const PRECIP_UNIT = {
+  MM: "mm", // DEFAULT
+  IN: "in",
+};
+
+const WIND_UNIT = {
+  KPH: "kph", // DEFAULT
+  MPH: "mph",
+};
+
+const VISIBILITY_UNIT = {
+  KM: "km", // DEFAULT
+  MILES: "miles",
+};
+
 export function createWeatherData() {
   let data = null;
-  let unit = "celsius";
+  let tempUnit = TEMP_UNIT.CELSIUS;
+  let precipUnit = PRECIP_UNIT.MM;
+  let windUnit = WIND_UNIT.KPH;
+  let visibilityUnit = VISIBILITY_UNIT.KM;
 
   return {
     setData(newData) {
       data = newData;
     },
 
+    // Temperature
+    toggleTemperature() {
+      tempUnit =
+        tempUnit === TEMP_UNIT.CELSIUS
+          ? TEMP_UNIT.FAHRENHEIT
+          : TEMP_UNIT.CELSIUS;
+    },
+
     getTemperature() {
-      return {};
+      if (!data) return null;
+      const isCelsius = tempUnit === TEMP_UNIT.CELSIUS;
+
+      return {
+        temperature: isCelsius ? data.tempC : data.tempF,
+        feelsLike: isCelsius ? data.feelsLikeC : data.feelsLikeF,
+        unit: isCelsius ? "°C" : "°F",
+      };
     },
 
-    toggleUnit() {
-      unit = unit === "celsius" ? "farenheit" : "celsius";
+    // Precipitation
+    togglePrecipitation() {
+      precipUnit =
+        precipUnit === PRECIP_UNIT.MM ? PRECIP_UNIT.IN : PRECIP_UNIT.MM;
     },
 
+    getPrecipitation() {
+      if (!data) return null;
+      const isMm = precipUnit === PRECIP_UNIT.MM;
+
+      return {
+        value: isMm ? data.precipMm : data.precipIn,
+        unit: isMm ? "mm" : "in",
+      };
+    },
+
+    // Wind
+    toggleWind() {
+      windUnit = windUnit === WIND_UNIT.KPH ? WIND_UNIT.MPH : WIND_UNIT.KPH;
+    },
+
+    getWind() {
+      if (!data) return null;
+      const isKph = windUnit === WIND_UNIT.KPH;
+
+      return {
+        value: isKph ? data.windKph : data.windMph,
+        unit: isKph ? "km/h" : "mph",
+      };
+    },
+
+    // Visibility
+    toggleVisibility() {
+      visibilityUnit =
+        visibilityUnit === VISIBILITY_UNIT.KM
+          ? VISIBILITY_UNIT.MILES
+          : VISIBILITY_UNIT.KM;
+    },
+
+    getVisibility() {
+      if (!data) return null;
+      const isKm = visibilityUnit === VISIBILITY_UNIT.KM;
+
+      return {
+        value: isKm ? data.visibilityKm : data.visibilityMiles,
+        unit: isKm ? "km" : "mi",
+      };
+    },
+
+    // Get all formatted data
     getFormatted() {
       if (!data) return null;
 
-      return data;
+      const temp = this.getTemperature();
+      const precip = this.getPrecipitation();
+      const wind = this.getWind();
+      const visibility = this.getVisibility();
+
+      return {
+        conditionIcon: data.conditionIcon,
+        temperature: temp.temperature,
+        tempUnit: temp.unit,
+        conditionText: data.conditionText,
+
+        location: data.location,
+
+        feelsLike: temp.feelsLike,
+
+        precipitation: precip.value,
+        precipUnit: precip.unit,
+
+        windSpeed: wind.value,
+        windUnit: wind.unit,
+
+        humidity: data.humidity,
+
+        uv: data.uv,
+
+        visibility: visibility.value,
+        visibilityUnit: visibility.unit,
+
+        cloudCover: data.cloudCover,
+      };
     },
   };
 }
