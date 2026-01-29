@@ -115,6 +115,10 @@ export function createWeatherData() {
       };
     },
 
+    isEmpty() {
+      return !data;
+    },
+
     // Get all formatted data
     getFormatted() {
       if (!data) return null;

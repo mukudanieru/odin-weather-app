@@ -49,14 +49,8 @@
         <main class="main">
           <div class="weather-card">
             <div class="temperature-container">
-              <div class="temperature-main">
-                <div id="weather-icon-container">
-                  <!-- <img
-                    src="/113.webp"
-                    alt="weather icon"
-                    class="weather-icon"
-                  /> -->
-                </div>
+              <div class="temperature-main clickable" id="toggle-temperature">
+                <div id="weather-icon-container"></div>
                 <div class="weather-temp">
                   <p id="temperature" class="temperature-value">--°</p>
                   <p id="condition" class="weather-condition">---</p>
@@ -70,7 +64,7 @@
             </div>
 
             <div class="weather-metrics">
-              <div class="weather-metric">
+              <div class="weather-metric clickable" id="precipitation-toggle">
                 <div class="metric-header">
                   <div class="metric-icon icon-precipitation">
                     <svg
@@ -96,7 +90,7 @@
                 <p class="metric-value" id="precipitation">--</p>
               </div>
 
-              <div class="weather-metric">
+              <div class="weather-metric clickable" id="wind-speed-toggle">
                 <div class="metric-header">
                   <div class="metric-icon icon-wind">
                     <svg
@@ -171,7 +165,7 @@
                 <p class="metric-value" id="uv-index">--</p>
               </div>
 
-              <div class="weather-metric">
+              <div class="weather-metric clickable" id="visibility-toggle">
                 <div class="metric-header">
                   <div class="metric-icon icon-visibility">
                     <svg

@@ -28,7 +28,7 @@ function createWeatherIcon(src) {
   return img;
 }
 
-const elements = {
+export const elements = {
   weatherIconContainer: document.querySelector("#weather-icon-container"),
   temperature: document.querySelector("#temperature"),
   conditionText: document.querySelector("#condition"),
@@ -61,10 +61,10 @@ export function updateWeatherCard(data) {
   elements.feelsLike.textContent = `${data.feelsLike}${data.tempUnit}`;
 
   // PRECIPTATION
-  elements.precipitation.textContent = `${data.precipitation}${data.precipUnit}`;
+  elements.precipitation.textContent = `${data.precipitation} ${data.precipUnit}`;
 
   // WIND SPEED
-  elements.windSpeed.textContent = `${data.windSpeed}${data.windUnit}`;
+  elements.windSpeed.textContent = `${data.windSpeed} ${data.windUnit}`;
 
   // HUMIDITY
   elements.humidity.textContent = `${data.humidity}%`;
@@ -73,7 +73,7 @@ export function updateWeatherCard(data) {
   elements.uv.textContent = data.uv;
 
   // VISIBILITY
-  elements.visibility.textContent = `${data.visibility}${data.visibilityUnit}`;
+  elements.visibility.textContent = `${data.visibility} ${data.visibilityUnit}`;
 
   // CLOUD COVER
   elements.cloudCover.textContent = `${data.cloudCover}%`;

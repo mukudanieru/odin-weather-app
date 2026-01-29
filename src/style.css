@@ -315,7 +315,7 @@ body {
   transition: background-color 0.2s ease;
 }
 
-.weather-metric:hover {
+.clickable:hover {
   background-color: rgb(var(--color-surface-muted) / 20);
   cursor: pointer;
 }

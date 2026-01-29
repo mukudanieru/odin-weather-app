@@ -7,7 +7,7 @@ import {
   normalizeWeatherData,
   createWeatherData,
 } from "./modules/api";
-import { createLocationItem, updateWeatherCard } from "./modules/ui";
+import { createLocationItem, elements, updateWeatherCard } from "./modules/ui";
 
 const weatherData = createWeatherData();
 const API_KEY = "185f9080f22643cd89d35208262001";
@@ -59,9 +59,51 @@ function handleSearchInput(e) {
 search.addEventListener("input", handleSearchInput);
 
 document.addEventListener("click", (e) => {
-  const button = e.target.closest(".suggestion-item");
+  const button = e.target.closest(".suggestion-item"); // In Suggestion
   const clickedInsideList = list.contains(e.target);
   const hasSuggestions = list.textContent.trim();
+  const clickableWeatherItem = e.target.closest(".clickable");
+
+  if (clickableWeatherItem && !weatherData.isEmpty()) {
+    const id = clickableWeatherItem.id;
+
+    if (id === "toggle-temperature") {
+      weatherData.toggleTemperature();
+
+      const { temperature, feelsLike, unit } = weatherData.getTemperature();
+
+      // TEMPERATURE
+      elements.temperature.textContent = `${temperature}${unit}`;
+
+      // FEELS LIKE
+      elements.feelsLike.textContent = `${feelsLike}${unit}`;
+
+      return;
+    } else if (id === "precipitation-toggle") {
+      weatherData.togglePrecipitation();
+
+      const { value, unit } = weatherData.getPrecipitation();
+
+      // PRECIPTATION
+      elements.precipitation.textContent = `${value} ${unit}`;
+
+      return;
+    } else if (id === "wind-speed-toggle") {
+      weatherData.toggleWind();
+
+      const { value, unit } = weatherData.getWind();
+
+      // WIND SPEED
+      elements.windSpeed.textContent = `${value} ${unit}`;
+    } else if (id == "visibility-toggle") {
+      weatherData.toggleVisibility();
+
+      const { value, unit } = weatherData.getVisibility();
+
+      // VISIBILITY
+      elements.visibility.textContent = `${value} ${unit}`;
+    }
+  }
 
   // Open suggestions when clicking the search input
   if (e.target.id === "weather-search" && hasSuggestions) {
