@@ -1,12 +1,19 @@
 import "./assets/fonts.css";
 import "./style.css";
-import { weatherSearch, fetchJSON } from "./modules/api";
+import {
+  weatherSearch,
+  weatherCurrent,
+  fetchJSON,
+  normalizeWeatherData,
+  createWeatherData,
+} from "./modules/api";
 import { createLocationItem } from "./modules/ui";
 
+const weatherData = createWeatherData();
 const API_KEY = "185f9080f22643cd89d35208262001";
 
 const list = document.querySelector("#suggestions");
-const search = document.querySelector("#weatherSearch");
+const search = document.querySelector("#weather-search");
 let timeoutID;
 
 function handleSearchInput(e) {
@@ -65,8 +72,19 @@ document.addEventListener("click", (e) => {
   // Handle suggestion selection (click anywhere inside the button)
   if (button && clickedInsideList) {
     suggestions.classList.remove("open");
-    // search.value = "";
-    console.log(button.dataset.url);
+    const query = button.dataset.url;
+    const url = weatherCurrent(API_KEY, query);
+    console.log(url);
+
+    fetchJSON(url)
+      .then((data) => {
+        const cleanData = normalizeWeatherData(data);
+        weatherData.setData(cleanData);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+
     return;
   }
 

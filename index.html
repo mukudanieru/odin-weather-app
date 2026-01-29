@@ -17,7 +17,7 @@
               <div class="search-input-row">
                 <input
                   type="text"
-                  id="weatherSearch"
+                  id="weather-search"
                   placeholder="Search for a city or town"
                 />
 
@@ -50,16 +50,22 @@
           <div class="weather-card">
             <div class="temperature-container">
               <div class="temperature-main">
-                <img src="/113.webp" alt="weather icon" class="weather-icon" />
+                <div id="weather-icon-container">
+                  <!-- <img
+                    src="/113.webp"
+                    alt="weather icon"
+                    class="weather-icon"
+                  /> -->
+                </div>
                 <div class="weather-temp">
-                  <p class="temperature-value">27°</p>
-                  <p class="weather-condition">Partly cloudy</p>
+                  <p id="temperature" class="temperature-value">--°</p>
+                  <p id="condition" class="weather-condition">---</p>
                 </div>
               </div>
 
               <div class="weather-meta">
-                <p class="location">Rosario, Cavite</p>
-                <p class="feels-like">Feels like 31.7°C</p>
+                <p id="location" class="location">--</p>
+                <p id="feels-like" class="feels-like">--</p>
               </div>
             </div>
 
@@ -87,7 +93,7 @@
                   </div>
                   <div class="metric-label">Precipitation</div>
                 </div>
-                <p class="metric-value" id="precipitation-value">0.07 mm</p>
+                <p class="metric-value" id="precipitation">--</p>
               </div>
 
               <div class="weather-metric">
@@ -109,7 +115,7 @@
                   </div>
                   <div class="metric-label">Wind Speed</div>
                 </div>
-                <p class="metric-value" id="wind-speed-value">12 km/h</p>
+                <p class="metric-value" id="wind-speed">--</p>
               </div>
 
               <div class="weather-metric">
@@ -134,7 +140,7 @@
                   </div>
                   <div class="metric-label">Humidity</div>
                 </div>
-                <p class="metric-value" id="humidity-value">65%</p>
+                <p class="metric-value" id="humidity">--</p>
               </div>
 
               <div class="weather-metric">
@@ -162,7 +168,7 @@
                   </div>
                   <div class="metric-label">UV Index</div>
                 </div>
-                <p class="metric-value" id="uv-index-value">5</p>
+                <p class="metric-value" id="uv-index">--</p>
               </div>
 
               <div class="weather-metric">
@@ -185,7 +191,7 @@
                   </div>
                   <div class="metric-label">Visibility</div>
                 </div>
-                <p class="metric-value" id="visibility-value">10 km</p>
+                <p class="metric-value" id="visibility">--</p>
               </div>
 
               <div class="weather-metric">
@@ -211,7 +217,7 @@
                   </div>
                   <div class="metric-label">Cloud Cover</div>
                 </div>
-                <p class="metric-value" id="cloud-cover-value">40%</p>
+                <p class="metric-value" id="cloud-cover">--</p>
               </div>
             </div>
           </div>
